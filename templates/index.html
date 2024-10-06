@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Wordle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .feedback {
+            font-size: 24px;
+        }
+
+        .guess-list {
+            margin-top: 20px;
+        }
+
+        .guess {
+            display: flex;
+        }
+
+        .letter {
+            margin: 0 5px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Guess the Word!</h1>
+    <form action="/guess" method="post">
+        <input type="text" name="guess" maxlength="5" required>
+        <button type="submit">Submit Guess</button>
+    </form>
+
+    {% if feedback %}
+    <div class="feedback">{{ feedback }}</div>
+    {% endif %}
+
+    <div>Attempts: {{ attempts }}</div>
+
+    <div class="guess-list">
+        <h3>Your Guesses:</h3>
+        <ul>
+            {% for word, feedback in guesses %}
+            <li class="guess">
+                {{ feedback }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="/reset">Start Over</a>
+</body>
+
+</html>
